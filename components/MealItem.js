@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     height: "85%",
   },
   mealDetail: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
     justifyContent: "space-between",
     alignItems: "center",
     height: "15%",
@@ -63,11 +63,11 @@ const styles = StyleSheet.create({
   titleContainer: {
     backgroundColor: "rgba(0,0,0,0.5)",
     paddingVertical: 5,
-    paddingHorizontal: 5,
+    paddingHorizontal: 12,
   },
   title: {
     fontFamily: "open-sans-bold",
-    fontSize: 22,
+    fontSize: 20,
     color: "#FFF",
     textAlign: "center",
   },

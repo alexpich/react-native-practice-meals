@@ -25,7 +25,15 @@ const MealsNavigator = createStackNavigator({
       headerTintColor: "#fff",
     },
   },
-  MealDetail: MealDetailScreen,
+  MealDetail: {
+    screen: MealDetailScreen,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: Colors.primary,
+      },
+      headerTintColor: "#fff",
+    },
+  },
 });
 
 export default createAppContainer(MealsNavigator);
