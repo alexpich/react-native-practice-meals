@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, Switch, Platform } from "react-native";
-
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useDispatch } from "react-redux";
 
 import HeaderButton from "../components/HeaderButton";
 import Colors from "../constants/Colors";
+import { setFilters } from "../store/actions/meals";
 
 const FilterSwitch = (props) => {
   return (
     <View style={styles.filterContainer}>
       <Text>{props.label}</Text>
       <Switch
-        trackColor={{ true: Colors.primary }}
-        thumbColor={Platform.OS === "android" ? Colors.primary : ""}
+        trackColor={{ true: Colors.primaryColor }}
+        thumbColor={Platform.OS === "android" ? Colors.primaryColor : ""}
         value={props.state}
         onValueChange={props.onChange}
       />
@@ -28,16 +29,18 @@ const FiltersScreen = (props) => {
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
 
+  const dispatch = useDispatch();
+
   const saveFilters = useCallback(() => {
     const appliedFilters = {
       glutenFree: isGlutenFree,
       lactoseFree: isLactoseFree,
       vegan: isVegan,
-      vegatarian: isVegetarian,
+      vegetarian: isVegetarian,
     };
 
-    console.log(appliedFilters);
-  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+    dispatch(setFilters(appliedFilters));
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch]);
 
   useEffect(() => {
     navigation.setParams({ save: saveFilters });
@@ -47,12 +50,12 @@ const FiltersScreen = (props) => {
     <View style={styles.screen}>
       <Text style={styles.title}>Available Filters / Restrictions</Text>
       <FilterSwitch
-        label="Gluten-Free"
+        label="Gluten-free"
         state={isGlutenFree}
         onChange={(newValue) => setIsGlutenFree(newValue)}
       />
       <FilterSwitch
-        label="Lactose-Free"
+        label="Lactose-free"
         state={isLactoseFree}
         onChange={(newValue) => setIsLactoseFree(newValue)}
       />
@@ -62,7 +65,7 @@ const FiltersScreen = (props) => {
         onChange={(newValue) => setIsVegan(newValue)}
       />
       <FilterSwitch
-        label="Vegatarian"
+        label="Vegetarian"
         state={isVegetarian}
         onChange={(newValue) => setIsVegetarian(newValue)}
       />
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "open-sans-bold",
-    fontSize: 20,
+    fontSize: 22,
     margin: 20,
     textAlign: "center",
   },
@@ -112,7 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "80%",
-    marginVertical: 10,
+    marginVertical: 15,
   },
 });
 
